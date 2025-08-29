@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscrição de Impacto | Instrutor de Cursos e Treinamentos - GATE</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #007bff; /* Azul clássico */
+            --accent-color: #ff6f00;  /* Laranja vibrante */
+            --text-color-primary: #ffffff;
+            --text-color-secondary: #e0e0e0;
+            --overlay-color-start: rgba(10, 25, 47, 0.9);
+            --overlay-color-end: rgba(20, 30, 55, 0.8);
+            --glass-background: rgba(0, 0, 0, 0.3);
+            --glass-border: rgba(255, 255, 255, 0.15);
+            --focus-glow: rgba(255, 111, 0, 0.5); /* Sombra de foco laranja */
+            --shadow-light: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-color-primary);
+            
+            /* --- IMAGEM DE FUNDO --- */
+            background-image: 
+                linear-gradient(115deg, var(--overlay-color-start), var(--overlay-color-end)),
+                url('https://images.pexels.com/photos/1181359/pexels-photo-1181359.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
+            background-size: cover;
+            background-position: center center;
+            background-attachment: fixed; /* Efeito Parallax */
+
+            padding: 40px 20px;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .form-container {
+            width: 100%;
+            max-width: 800px;
+            background: var(--glass-background);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border-radius: 20px;
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--shadow-light);
+            padding: 50px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .form-container:hover {
+            transform: scale(1.01);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .header h1 {
+            font-size: 4.5em;
+            font-weight: 800;
+            color: var(--text-color-primary);
+            letter-spacing: -2px;
+            text-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        }
+        .header h2 {
+            font-size: 1.8em;
+            font-weight: 600;
+            color: var(--accent-color); /* Usando a cor laranja */
+            margin-top: 5px;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+        .header p {
+            font-size: 1.1em;
+            color: var(--text-color-secondary);
+            margin-top: 15px;
+            line-height: 1.6;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 500;
+            font-size: 1.1em;
+            color: var(--text-color-secondary);
+        }
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 16px 20px;
+            background: rgba(0,0,0,0.2);
+            border: 1px solid var(--glass-border);
+            border-radius: 10px;
+            color: var(--text-color-primary);
+            font-size: 1.1em;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
+        }
+        .form-group input::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+        }
+        .form-group select option {
+            background: #1e2a38;
+            color: var(--text-color-primary);
+        }
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 15px var(--focus-glow);
+            background: rgba(0,0,0, 0.3);
+        }
+
+        #pix-options {
+            display: none;
+            background: rgba(255, 111, 0, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 15px;
+            border: 1px solid var(--accent-color);
+        }
+        #pix-options label { color: var(--accent-color); font-weight: 600; }
+
+        .button-submit {
+            background: linear-gradient(90deg, #ff8c00, #ff5722); /* Gradiente Laranja */
+            color: white;
+            padding: 20px 25px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1.4em;
+            font-weight: 700;
+            letter-spacing: 1px;
+            transition: all 0.4s ease;
+            box-shadow: 0 5px 25px rgba(255, 111, 0, 0.5);
+            text-transform: uppercase;
+        }
+        .button-submit:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 35px rgba(255, 111, 0, 0.7);
+        }
+        .button-submit:active {
+            transform: translateY(0);
+        }
+        
+        /* Animação de Rolagem */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+    </style>
+</head>
+<body>
+
+    <div class="form-container">
+        <div class="header reveal">
+            <h1>GATE</h1>
+            <h2>FORMAÇÃO DE INSTRUTORES</h2>
+            <p><strong>Curso:</strong> Instrutor de Cursos e Treinamentos - CFC<br>Preencha seus dados e garanta sua vaga na próxima turma.</p>
+        </div>
+
+        <form id="matriculaForm">
+            <div class="form-group reveal" style="transition-delay: 0.1s;">
+                <label for="nome">Nome Completo:</label>
+                <input type="text" id="nome" name="nome" placeholder="Seu nome como no documento" required>
+            </div>
+            
+            <div class="form-group reveal" style="transition-delay: 0.2s;">
+                <label for="nome_social">Nome Social (Opcional):</label>
+                <input type="text" id="nome_social" name="nome_social" placeholder="Como você prefere ser chamado(a)">
+            </div>
+
+            <div class="form-group reveal" style="transition-delay: 0.3s;">
+                <label for="telefone">Telefone (com DDD):</label>
+                <input type="tel" id="telefone" name="telefone" placeholder="(XX) XXXXX-XXXX" required pattern="^\(\d{2}\)\s\d{5}-\d{4}$">
+            </div>
+
+            <div class="form-group reveal" style="transition-delay: 0.4s;">
+                <label for="email">Seu Melhor E-mail:</label>
+                <input type="email" id="email" name="email" placeholder="email.principal@exemplo.com" required>
+            </div>
+
+            <div class="form-group reveal" style="transition-delay: 0.5s;">
+                <label for="data_pagamento">Data Prevista do Pagamento:</label>
+                <input type="date" id="data_pagamento" name="data_pagamento" required style="color-scheme: dark;">
+            </div>
+
+            <div class="form-group reveal" style="transition-delay: 0.6s;">
+                <label for="forma_pagamento">Forma de Pagamento:</label>
+                <select id="forma_pagamento" name="forma_pagamento" required>
+                    <option value="" disabled selected>-- Escolha como prefere pagar --</option>
+                    <option value="credito">Cartão de Crédito</option>
+                    <option value="debito">Cartão de Débito</option>
+                    <option value="pix">PIX</option>
+                </select>
+            </div>
+
+            <div id="pix-options" class="form-group reveal" style="transition-delay: 0.7s;">
+                <label for="pix_parcelas">Opções de Parcelamento no PIX:</label>
+                <select id="pix_parcelas" name="pix_parcelas">
+                    <option value="1">1x (Pagamento Integral)</option>
+                    <option value="2">2x</option>
+                    <option value="3">3x</option>
+                    <option value="4">4x</option>
+                </select>
+            </div>
+            
+            <div class="form-group reveal" style="transition-delay: 0.8s;">
+                <button type="submit" class="button-submit">Finalizar e garantir a vaga</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // --- ANIMAÇÃO DE ROLAGEM ---
+        const revealElements = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        revealElements.forEach(el => observer.observe(el));
+
+        // --- LÓGICA DO FORMULÁRIO ---
+        const formaPagamentoSelect = document.getElementById('forma_pagamento');
+        const pixOptionsDiv = document.getElementById('pix-options');
+        const matriculaForm = document.getElementById('matriculaForm');
+        const telefoneInput = document.getElementById('telefone');
+
+        telefoneInput.addEventListener('input', function (e) {
+            let value = e.target.value.replace(/\D/g, '').substring(0,11);
+            if (value.length > 2) value = `(${value.substring(0, 2)}) ${value.substring(2)}`;
+            if (value.length > 9) value = `${value.substring(0, 10)}-${value.substring(10)}`;
+            e.target.value = value;
+        });
+
+        formaPagamentoSelect.addEventListener('change', function() {
+            if (this.value === 'pix') pixOptionsDiv.style.display = 'block';
+            else pixOptionsDiv.style.display = 'none';
+        });
+
+        matriculaForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            if (!matriculaForm.checkValidity()) {
+                alert('Por favor, preencha todos os campos obrigatórios corretamente.');
+                return;
+            }
+            const nome = document.getElementById('nome').value;
+            const nomeSocial = document.getElementById('nome_social').value;
+            const telefone = document.getElementById('telefone').value;
+            const email = document.getElementById('email').value;
+
+            const dataPagamento = new Date(document.getElementById('data_pagamento').value).toLocaleDateString('pt-BR', {timeZone: 'UTC'});
+            
+            const formaPagamento = formaPagamentoSelect.options[formaPagamentoSelect.selectedIndex].text;
+            let pixParcelas = (formaPagamentoSelect.value === 'pix') ? ` em ${document.getElementById('pix_parcelas').value}x` : '';
+            
+            const mensagemWhatsApp = `*MATRÍCULA | CURSO CFC - GATE*
+Olá! Acabei de realizar minha pré-matrícula e gostaria de confirmar minha vaga.
+
+*DADOS DO ALUNO:*
+- *Nome:* ${nome}
+${nomeSocial ? `- *Nome Social:* ${nomeSocial}\n` : ''}- *Telefone:* ${telefone}
+- *Email:* ${email}
+
+*PAGAMENTO:*
+- *Data Prevista:* ${dataPagamento}
+- *Forma Escolhida:* ${formaPagamento}${pixParcelas}
+
+Aguardo as instruções para finalizar o pagamento. Obrigado!`;
+
+            const mensagemCodificada = encodeURIComponent(mensagemWhatsApp);
+            const numeroWhatsApp = '61998300711';
+            const linkWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${mensagemCodificada}`;
+
+            window.open(linkWhatsApp, '_blank');
+        });
+    </script>
+</body>
+</html>
