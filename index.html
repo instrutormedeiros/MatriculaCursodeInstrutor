@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Inscrição de Impacto | Instrutor de Cursos e Treinamentos - GATE</title>
     
     <!-- Fontes -->
@@ -38,7 +38,6 @@
         body {
             font-family: 'Poppins', sans-serif;
             color: var(--text-color-primary);
-            /* Imagem de fundo aprimorada com overlay mais escuro para garantir leitura */
             background-image: 
                 linear-gradient(135deg, rgba(2, 6, 23, 0.95) 0%, rgba(15, 23, 42, 0.85) 100%),
                 url('https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2070&auto=format&fit=crop');
@@ -68,14 +67,13 @@
         /* --- CABEÇALHO --- */
         .header {
             text-align: center;
-            margin-bottom: 45px;
+            margin-bottom: 40px;
             border-bottom: 1px solid var(--glass-border);
-            padding-bottom: 30px;
+            padding-bottom: 25px;
         }
 
         .header h1 {
-            /* Responsividade automática: Mínimo 2.5rem, ideal 5vw, máximo 4rem */
-            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-size: clamp(2.2rem, 5vw, 4rem);
             font-weight: 800;
             color: var(--text-color-primary);
             letter-spacing: -1.5px;
@@ -85,10 +83,10 @@
         }
 
         .header h2 {
-            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            font-size: clamp(1.1rem, 3vw, 1.8rem);
             font-weight: 600;
             color: var(--accent-color);
-            letter-spacing: 2px;
+            letter-spacing: 1.5px;
             text-transform: uppercase;
             margin-bottom: 15px;
         }
@@ -136,6 +134,8 @@
         .form-group label i {
             color: var(--accent-color);
             stroke-width: 2.5;
+            width: 20px;
+            height: 20px;
         }
 
         /* Estilo unificado para inputs e selects */
@@ -146,13 +146,24 @@
             border: 1px solid var(--input-border);
             border-radius: 12px;
             color: var(--text-color-primary);
-            font-size: 1.05em;
+            font-size: 16px; /* Fixo em 16px para evitar zoom no iOS */
             font-family: 'Poppins', sans-serif;
             transition: var(--transition-smooth);
+            appearance: none; /* Remove estilos nativos do SO que as vezes atrapalham no mobile */
+            -webkit-appearance: none;
+        }
+
+        /* Ajuste específico para select mostrar a setinha personalizada */
+        select.form-control {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23ff6f00' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 15px center;
+            background-size: 18px;
+            padding-right: 45px;
         }
 
         .form-control::placeholder {
-            color: rgba(255, 255, 255, 0.3);
+            color: rgba(255, 255, 255, 0.4);
             font-weight: 300;
         }
 
@@ -160,23 +171,24 @@
         .form-control option {
             background-color: var(--primary-color);
             color: var(--text-color-primary);
-            padding: 10px;
+            padding: 15px; /* Maior área de toque nas opções */
         }
 
         /* Foco nos campos */
         .form-control:focus {
             outline: none;
             border-color: var(--accent-color);
-            box-shadow: 0 0 0 4px var(--focus-glow);
+            box-shadow: 0 0 0 3px var(--focus-glow);
             background: rgba(255, 255, 255, 0.08);
         }
 
         /* Para manter o ícone do calendário branco no date input */
         ::-webkit-calendar-picker-indicator {
             filter: invert(1);
-            opacity: 0.6;
+            opacity: 0.8;
             cursor: pointer;
             transition: var(--transition-smooth);
+            padding: 5px; /* Mais fácil de clicar no mobile */
         }
         ::-webkit-calendar-picker-indicator:hover {
             opacity: 1;
@@ -185,11 +197,12 @@
         /* --- ÁREA ESPECÍFICA DO PIX --- */
         #pix-options {
             display: none;
-            background: rgba(255, 111, 0, 0.05);
+            background: rgba(255, 111, 0, 0.08);
             padding: 20px;
             border-radius: 12px;
             border: 1px solid rgba(255, 111, 0, 0.3);
             animation: fadeInDown 0.4s ease forwards;
+            flex-direction: column;
         }
 
         #pix-options label { 
@@ -215,22 +228,22 @@
             letter-spacing: 1px;
             transition: var(--transition-smooth);
             text-transform: uppercase;
-            box-shadow: 0 10px 20px -5px rgba(255, 111, 0, 0.4);
+            box-shadow: 0 8px 20px -5px rgba(255, 111, 0, 0.5);
             display: flex;
             justify-content: center;
             align-items: center;
             gap: 10px;
-            margin-top: 15px;
+            margin-top: 10px;
         }
 
         .button-submit:hover {
             background: var(--accent-hover);
-            transform: translateY(-3px);
-            box-shadow: 0 15px 25px -5px rgba(255, 111, 0, 0.6);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 25px -5px rgba(255, 111, 0, 0.7);
         }
 
         .button-submit:active {
-            transform: translateY(0);
+            transform: translateY(1px);
         }
 
         /* Estado de carregamento do botão */
@@ -251,22 +264,84 @@
         /* --- ANIMAÇÕES REVEAL --- */
         .reveal {
             opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
         }
         .reveal.visible {
             opacity: 1;
             transform: translateY(0);
         }
 
-        /* --- RESPONSIVIDADE P/ CELULAR --- */
-        @media (max-width: 768px) {
+        /* ========================================================
+           RESPONSIVIDADE AVANÇADA (TABLETS E CELULARES)
+           ======================================================== */
+
+        /* Tablets em modo Paisagem (Landscape) */
+        @media (max-width: 992px) {
             .form-container {
-                padding: 40px 25px;
+                padding: 40px 40px;
+            }
+        }
+
+        /* Tablets em modo Retrato e Celulares Grandes */
+        @media (max-width: 768px) {
+            body {
+                padding: 20px 15px; /* Reduz margens externas para dar mais espaço ao form */
+            }
+            .form-container {
+                padding: 35px 25px;
+                border-radius: 20px;
             }
             #matriculaForm {
-                grid-template-columns: 1fr; /* Tudo em 1 coluna no celular */
-                gap: 20px;
+                grid-template-columns: 1fr; /* Força 1 coluna */
+                gap: 20px; /* Reduz o espaço vertical entre campos */
+            }
+            .header h1 {
+                font-size: 2.2rem;
+            }
+            .header p {
+                font-size: 0.95em;
+            }
+            .button-submit {
+                font-size: 1.1em;
+                padding: 18px 20px;
+            }
+        }
+
+        /* Celulares normais/pequenos (iPhones antigos, Androids menores) */
+        @media (max-width: 480px) {
+            body {
+                padding: 15px 10px; /* Margem mínima externa */
+            }
+            .form-container {
+                padding: 30px 20px;
+                border-radius: 16px;
+            }
+            .header {
+                margin-bottom: 30px;
+                padding-bottom: 20px;
+            }
+            .header h1 {
+                font-size: 2rem;
+                letter-spacing: -1px;
+            }
+            .header h2 {
+                font-size: 1rem;
+            }
+            .form-control {
+                padding: 14px 16px; /* Reduz levemente o padding, mantendo área de toque */
+            }
+            .form-group label {
+                font-size: 0.9em;
+            }
+            .button-submit {
+                font-size: 1.05em;
+                white-space: normal; /* Permite quebrar linha no texto do botão se necessário */
+                text-align: center;
+                line-height: 1.3;
+            }
+            #pix-options {
+                padding: 15px; /* Menos padding interno no box do PIX */
             }
         }
     </style>
@@ -284,32 +359,35 @@
             <!-- Dados Pessoais -->
             <div class="form-group full-width reveal" style="transition-delay: 0.1s;">
                 <label for="nome"><i data-lucide="user"></i> Nome Completo:</label>
-                <input type="text" id="nome" name="nome" class="form-control" placeholder="Seu nome exatamente como no documento" required autocomplete="name">
+                <!-- inputmode="text" ajuda o teclado mobile a se preparar para nomes -->
+                <input type="text" id="nome" name="nome" class="form-control" placeholder="Seu nome exatamente como no documento" required autocomplete="name" inputmode="text">
             </div>
             
             <div class="form-group full-width reveal" style="transition-delay: 0.2s;">
                 <label for="nome_social"><i data-lucide="smile"></i> Nome Social (Opcional):</label>
-                <input type="text" id="nome_social" name="nome_social" class="form-control" placeholder="Como você prefere ser chamado(a)">
+                <input type="text" id="nome_social" name="nome_social" class="form-control" placeholder="Como você prefere ser chamado(a)" inputmode="text">
             </div>
 
-            <!-- Contatos (Lado a lado no Desktop) -->
-        <div class="form-group reveal" style="transition-delay: 0.3s;">
-            <label for="telefone"><i data-lucide="smartphone"></i> WhatsApp (com DDD):</label>
-            <input type="tel" id="telefone" name="telefone" class="form-control" placeholder="(XX) 9XXXX-XXXX" required pattern="^\(\d{2}\)\s\d{5}-\d{4}$" autocomplete="tel">
-        </div>
+            <!-- Contatos (Lado a lado no Desktop, empilhado no mobile) -->
+            <div class="form-group reveal" style="transition-delay: 0.3s;">
+                <label for="telefone"><i data-lucide="smartphone"></i> WhatsApp (com DDD):</label>
+                <!-- inputmode="numeric" FORÇA abrir o teclado numérico no celular (Excelente UX) -->
+                <input type="tel" id="telefone" name="telefone" class="form-control" placeholder="(XX) 9XXXX-XXXX" required pattern="^\(\d{2}\)\s\d{5}-\d{4}$" autocomplete="tel" inputmode="numeric">
+            </div>
 
-        <div class="form-group reveal" style="transition-delay: 0.4s;">
-            <label for="email"><i data-lucide="mail"></i> E-mail para contato:</label>
-            <input type="email" id="email" name="email" class="form-control" placeholder="email.principal@exemplo.com" required autocomplete="email">
-        </div>
+            <div class="form-group reveal" style="transition-delay: 0.4s;">
+                <label for="email"><i data-lucide="mail"></i> E-mail para contato:</label>
+                <!-- inputmode="email" adiciona o botão "@" e ".com" mais fáceis no teclado do celular -->
+                <input type="email" id="email" name="email" class="form-control" placeholder="email.principal@exemplo.com" required autocomplete="email" inputmode="email">
+            </div>
 
-        <!-- Pagamento (Lado a lado no Desktop) -->
-        <div class="form-group reveal" style="transition-delay: 0.5s;">
-            <label for="data_pagamento"><i data-lucide="calendar"></i> Data de Pagamento:</label>
-            <input type="date" id="data_pagamento" name="data_pagamento" class="form-control" required style="color-scheme: dark;">
-        </div>
+            <!-- Pagamento (Lado a lado no Desktop, empilhado no mobile) -->
+            <div class="form-group reveal" style="transition-delay: 0.5s;">
+                <label for="data_pagamento"><i data-lucide="calendar"></i> Data de Pagamento:</label>
+                <input type="date" id="data_pagamento" name="data_pagamento" class="form-control" required style="color-scheme: dark;">
+            </div>
 
-        <div class="form-group reveal" style="transition-delay: 0.6s;">
+            <div class="form-group reveal" style="transition-delay: 0.6s;">
                 <label for="forma_pagamento"><i data-lucide="credit-card"></i> Forma de Pagamento:</label>
                 <select id="forma_pagamento" name="forma_pagamento" class="form-control" required>
                     <option value="" disabled selected>-- Escolha como prefere pagar --</option>
@@ -331,22 +409,21 @@
             </div>
             
             <!-- Botão -->
-        <div class="form-group full-width reveal" style="transition-delay: 0.8s;">
-            <button type="submit" class="button-submit" id="btn-submit">
-                Finalizar e garantir a vaga <i data-lucide="arrow-right"></i>
-            </button>
-        </div>
-    </form>
-    
-    <p class="cnpj-footer reveal" style="transition-delay: 0.9s;">CNPJ: 63.911.037/0001-91</p>
-</div>
+            <div class="form-group full-width reveal" style="transition-delay: 0.8s;">
+                <button type="submit" class="button-submit" id="btn-submit">
+                    Finalizar e garantir a vaga <i data-lucide="arrow-right"></i>
+                </button>
+            </div>
+        </form>
+        
+        <p class="cnpj-footer reveal" style="transition-delay: 0.9s;">CNPJ: 63.911.037/0001-91</p>
+    </div>
 
-<script>
-    // Inicializa os ícones do Lucide
+    <script>
+        // Inicializa os ícones do Lucide
         lucide.createIcons();
 
         // --- UX: DATA MÍNIMA DE PAGAMENTO ---
-        // Impede que o usuário selecione uma data no passado
         const dataPagamentoInput = document.getElementById('data_pagamento');
         const hoje = new Date().toISOString().split('T')[0];
         dataPagamentoInput.setAttribute('min', hoje);
@@ -378,7 +455,7 @@
         
         formaPagamentoSelect.addEventListener('change', function() {
             if (this.value === 'pix') {
-                pixOptionsDiv.style.display = 'flex'; // Usando flex p/ manter alinhamento do label
+                pixOptionsDiv.style.display = 'flex'; // Usando flex p/ manter alinhamento do label no mobile
             } else {
                 pixOptionsDiv.style.display = 'none';
             }
@@ -389,11 +466,10 @@
         const btnSubmit = document.getElementById('btn-submit');
 
         matriculaForm.addEventListener('submit', function(event) {
-            event.preventDefault(); // Impede o recarregamento da página
+            event.preventDefault(); 
 
-            // Validação HTML5 Nativa
             if (!matriculaForm.checkValidity()) {
-                // O navegador já mostra os balões de erro nativos, mas garantimos que não avance
+                // Se algum campo faltar no mobile, o navegador fará o scroll automático até ele
                 return;
             }
 
@@ -401,7 +477,7 @@
             const textoOriginalBotao = btnSubmit.innerHTML;
             btnSubmit.classList.add('loading');
             btnSubmit.innerHTML = 'Processando sua inscrição... <i data-lucide="loader" class="lucide-spin"></i>';
-            lucide.createIcons(); // Recarrega o ícone para renderizar o spinner
+            lucide.createIcons(); 
 
             // Captura de Dados
             const nome = document.getElementById('nome').value.trim();
@@ -409,7 +485,7 @@
             const telefone = document.getElementById('telefone').value;
             const email = document.getElementById('email').value.trim();
             
-            // Formatando a data de AAAA-MM-DD para DD/MM/AAAA (Fuso UTC para evitar bug de dia anterior)
+            // Formatando a data
             const dataBruta = document.getElementById('data_pagamento').value;
             const dataArray = dataBruta.split('-');
             const dataFormatada = `${dataArray[2]}/${dataArray[1]}/${dataArray[0]}`;
@@ -422,8 +498,8 @@
                 pixParcelas = `\n- *Detalhe:* ${textoParcela}`;
             }
             
-            // Montagem da Mensagem de forma limpa
-        const mensagemWhatsApp = `*MATRÍCULA | CURSO CFC - GATE*
+            // Montagem da Mensagem
+            const mensagemWhatsApp = `*MATRÍCULA | CURSO CFC - GATE*
 Olá! Acabei de realizar minha pré-matrícula e gostaria de confirmar minha vaga.
 
 *DADOS DO ALUNO:*
@@ -437,15 +513,13 @@ ${nomeSocial ? `- *Nome Social:* ${nomeSocial}\n` : ''}- *WhatsApp:* ${telefone}
 
 Aguardo as instruções para finalizar. Obrigado!`;
 
-        const mensagemCodificada = encodeURIComponent(mensagemWhatsApp);
+            const mensagemCodificada = encodeURIComponent(mensagemWhatsApp);
             const numeroWhatsApp = '61998300711';
             const linkWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${mensagemCodificada}`;
 
-            // Simula um pequeno delay (800ms) para o usuário ler o "Processando..." antes de redirecionar
             setTimeout(() => {
                 window.open(linkWhatsApp, '_blank');
                 
-                // Restaura o botão caso o usuário volte para a aba
                 btnSubmit.classList.remove('loading');
                 btnSubmit.innerHTML = textoOriginalBotao;
             }, 800);
