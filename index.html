@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Inscrição de Impacto | Instrutor de Cursos e Treinamentos - GATE</title>
+    <title>Portal de Matrículas | Cursos e Treinamentos - GATE</title>
     
     <!-- Fontes -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -351,11 +351,30 @@
     <div class="form-container">
         <div class="header reveal">
             <h1>GATE</h1>
-            <h2>FORMAÇÃO DE INSTRUTORES</h2>
-            <p><strong>Curso:</strong> Instrutor de Cursos e Treinamentos - CFC<br>Preencha seus dados com atenção e garanta sua vaga na próxima turma.</p>
+            <h2>PORTAL DE MATRÍCULAS</h2>
+            <p>Selecione o curso desejado, preencha seus dados com atenção e garanta sua vaga na próxima turma.</p>
         </div>
 
         <form id="matriculaForm">
+            <!-- SELEÇÃO DE CURSO -->
+            <div class="form-group full-width reveal" style="transition-delay: 0.05s;">
+                <label for="curso_desejado"><i data-lucide="graduation-cap"></i> Curso Desejado:</label>
+                <select id="curso_desejado" name="curso_desejado" class="form-control" required>
+                    <option value="" disabled selected>-- Selecione o curso que deseja realizar --</option>
+                    <option value="Instrutor de Cursos e Treinamentos - CFC">Instrutor de Cursos e Treinamentos - CFC</option>
+                    <option value="Segurança Patrimonial">Segurança Patrimonial</option>
+                    <option value="Cuidador de Idosos">Cuidador de Idosos</option>
+                    <option value="Lei Lucas">Lei Lucas</option>
+                    <option value="NR 05">NR 05</option>
+                    <option value="NR 06">NR 06</option>
+                    <option value="NR (Outras)">NR (Outras)</option>
+                    <option value="Auxiliar Veterinário">Auxiliar Veterinário</option>
+                    <option value="Atendente de Farmácia">Atendente de Farmácia</option>
+                    <option value="Stop the Bleeding">Stop the Bleeding</option>
+                    <option value="Inteligência Artificial">Inteligência Artificial</option>
+                </select>
+            </div>
+
             <!-- Dados Pessoais -->
             <div class="form-group full-width reveal" style="transition-delay: 0.1s;">
                 <label for="nome"><i data-lucide="user"></i> Nome Completo:</label>
@@ -480,6 +499,7 @@
             lucide.createIcons(); 
 
             // Captura de Dados
+            const cursoSelecionado = document.getElementById('curso_desejado').value;
             const nome = document.getElementById('nome').value.trim();
             const nomeSocial = document.getElementById('nome_social').value.trim();
             const telefone = document.getElementById('telefone').value;
@@ -499,8 +519,11 @@
             }
             
             // Montagem da Mensagem
-            const mensagemWhatsApp = `*MATRÍCULA | CURSO CFC - GATE*
+            const mensagemWhatsApp = `*MATRÍCULA | PORTAL GATE*
 Olá! Acabei de realizar minha pré-matrícula e gostaria de confirmar minha vaga.
+
+*CURSO ESCOLHIDO:*
+🎯 ${cursoSelecionado}
 
 *DADOS DO ALUNO:*
 - *Nome:* ${nome}
