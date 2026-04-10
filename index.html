@@ -4,21 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inscrição de Impacto | Instrutor de Cursos e Treinamentos - GATE</title>
+    
+    <!-- Fontes -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Ícones -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
     <style>
         :root {
-            --primary-color: #007bff; /* Azul clássico */
+            --primary-color: #0f172a; /* Slate 900 */
             --accent-color: #ff6f00;  /* Laranja vibrante */
-            --text-color-primary: #ffffff;
-            --text-color-secondary: #e0e0e0;
-            --overlay-color-start: rgba(10, 25, 47, 0.9);
-            --overlay-color-end: rgba(20, 30, 55, 0.8);
-            --glass-background: rgba(0, 0, 0, 0.3);
-            --glass-border: rgba(255, 255, 255, 0.15);
-            --focus-glow: rgba(255, 111, 0, 0.5); /* Sombra de foco laranja */
-            --shadow-light: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+            --accent-hover: #e66400;
+            --text-color-primary: #f8fafc;
+            --text-color-secondary: #cbd5e1;
+            --glass-bg: rgba(15, 23, 42, 0.75);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --input-bg: rgba(255, 255, 255, 0.05);
+            --input-border: rgba(255, 255, 255, 0.15);
+            --focus-glow: rgba(255, 111, 0, 0.3);
+            --shadow-light: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         * {
@@ -30,147 +38,237 @@
         body {
             font-family: 'Poppins', sans-serif;
             color: var(--text-color-primary);
-            
-            /* --- IMAGEM DE FUNDO --- */
+            /* Imagem de fundo aprimorada com overlay mais escuro para garantir leitura */
             background-image: 
-                linear-gradient(115deg, var(--overlay-color-start), var(--overlay-color-end)),
-                url('https://images.pexels.com/photos/1181359/pexels-photo-1181359.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
+                linear-gradient(135deg, rgba(2, 6, 23, 0.95) 0%, rgba(15, 23, 42, 0.85) 100%),
+                url('https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2070&auto=format&fit=crop');
             background-size: cover;
-            background-position: center center;
-            background-attachment: fixed; /* Efeito Parallax */
-
+            background-position: center;
+            background-attachment: fixed;
             padding: 40px 20px;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
         }
 
         .form-container {
             width: 100%;
-            max-width: 800px;
-            background: var(--glass-background);
-            backdrop-filter: blur(18px);
-            -webkit-backdrop-filter: blur(18px);
-            border-radius: 20px;
+            max-width: 850px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 24px;
             border: 1px solid var(--glass-border);
             box-shadow: var(--shadow-light);
-            padding: 50px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .form-container:hover {
-            transform: scale(1.01);
+            padding: 50px 60px;
         }
 
+        /* --- CABEÇALHO --- */
         .header {
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 45px;
+            border-bottom: 1px solid var(--glass-border);
+            padding-bottom: 30px;
         }
+
         .header h1 {
-            font-size: 4.5em;
+            /* Responsividade automática: Mínimo 2.5rem, ideal 5vw, máximo 4rem */
+            font-size: clamp(2.5rem, 5vw, 4rem);
             font-weight: 800;
             color: var(--text-color-primary);
-            letter-spacing: -2px;
-            text-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            letter-spacing: -1.5px;
+            line-height: 1.1;
+            margin-bottom: 10px;
+            text-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
         }
+
         .header h2 {
-            font-size: 1.8em;
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
             font-weight: 600;
-            color: var(--accent-color); /* Usando a cor laranja */
-            margin-top: 5px;
-            text-shadow: 0 2px 5px rgba(0,0,0,0.3);
+            color: var(--accent-color);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
         }
+
         .header p {
-            font-size: 1.1em;
+            font-size: 1.05em;
             color: var(--text-color-secondary);
-            margin-top: 15px;
             line-height: 1.6;
+            font-weight: 300;
+        }
+        .header p strong {
+            color: var(--text-color-primary);
+            font-weight: 500;
+        }
+
+        /* --- LAYOUT DO FORMULÁRIO (GRID) --- */
+        #matriculaForm {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px 20px;
         }
 
         .form-group {
-            margin-bottom: 25px;
             position: relative;
+            display: flex;
+            flex-direction: column;
         }
+
+        /* Classes para ocupar a linha inteira */
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
         .form-group label {
-            display: block;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             font-weight: 500;
-            font-size: 1.1em;
+            font-size: 0.95em;
             color: var(--text-color-secondary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
-        .form-group input,
-        .form-group select {
+
+        /* Ícones ao lado das labels */
+        .form-group label i {
+            color: var(--accent-color);
+            stroke-width: 2.5;
+        }
+
+        /* Estilo unificado para inputs e selects */
+        .form-control {
             width: 100%;
             padding: 16px 20px;
-            background: rgba(0,0,0,0.2);
-            border: 1px solid var(--glass-border);
-            border-radius: 10px;
+            background: var(--input-bg);
+            border: 1px solid var(--input-border);
+            border-radius: 12px;
             color: var(--text-color-primary);
-            font-size: 1.1em;
+            font-size: 1.05em;
             font-family: 'Poppins', sans-serif;
-            transition: all 0.3s ease;
+            transition: var(--transition-smooth);
         }
-        .form-group input::placeholder {
-            color: rgba(255, 255, 255, 0.4);
+
+        .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.3);
+            font-weight: 300;
         }
-        .form-group select option {
-            background: #1e2a38;
+
+        /* Estilizando o menu dropdown */
+        .form-control option {
+            background-color: var(--primary-color);
             color: var(--text-color-primary);
+            padding: 10px;
         }
-        .form-group input:focus,
-        .form-group select:focus {
+
+        /* Foco nos campos */
+        .form-control:focus {
             outline: none;
             border-color: var(--accent-color);
-            box-shadow: 0 0 15px var(--focus-glow);
-            background: rgba(0,0,0, 0.3);
+            box-shadow: 0 0 0 4px var(--focus-glow);
+            background: rgba(255, 255, 255, 0.08);
         }
 
+        /* Para manter o ícone do calendário branco no date input */
+        ::-webkit-calendar-picker-indicator {
+            filter: invert(1);
+            opacity: 0.6;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+        ::-webkit-calendar-picker-indicator:hover {
+            opacity: 1;
+        }
+
+        /* --- ÁREA ESPECÍFICA DO PIX --- */
         #pix-options {
             display: none;
-            background: rgba(255, 111, 0, 0.1);
+            background: rgba(255, 111, 0, 0.05);
             padding: 20px;
-            border-radius: 10px;
-            margin-top: 15px;
-            border: 1px solid var(--accent-color);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 111, 0, 0.3);
+            animation: fadeInDown 0.4s ease forwards;
         }
-        #pix-options label { color: var(--accent-color); font-weight: 600; }
 
+        #pix-options label { 
+            color: var(--accent-color); 
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- BOTÃO SUBMIT --- */
         .button-submit {
-            background: linear-gradient(90deg, #ff8c00, #ff5722); /* Gradiente Laranja */
+            background: var(--accent-color);
             color: white;
             padding: 20px 25px;
             border: none;
-            border-radius: 10px;
+            border-radius: 12px;
             cursor: pointer;
             width: 100%;
-            font-size: 1.4em;
+            font-size: 1.2em;
             font-weight: 700;
             letter-spacing: 1px;
-            transition: all 0.4s ease;
-            box-shadow: 0 5px 25px rgba(255, 111, 0, 0.5);
+            transition: var(--transition-smooth);
             text-transform: uppercase;
+            box-shadow: 0 10px 20px -5px rgba(255, 111, 0, 0.4);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-top: 15px;
         }
+
         .button-submit:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 35px rgba(255, 111, 0, 0.7);
+            background: var(--accent-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 25px -5px rgba(255, 111, 0, 0.6);
         }
+
         .button-submit:active {
             transform: translateY(0);
         }
-        
-        /* Animação de Rolagem */
+
+        /* Estado de carregamento do botão */
+        .button-submit.loading {
+            opacity: 0.8;
+            cursor: wait;
+            pointer-events: none;
+        }
+
+        .cnpj-footer {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 0.85em;
+            color: var(--text-color-secondary);
+            opacity: 0.7;
+        }
+
+        /* --- ANIMAÇÕES REVEAL --- */
         .reveal {
             opacity: 0;
-            transform: translateY(40px);
+            transform: translateY(30px);
             transition: opacity 0.8s ease-out, transform 0.8s ease-out;
         }
         .reveal.visible {
             opacity: 1;
             transform: translateY(0);
         }
-        
+
+        /* --- RESPONSIVIDADE P/ CELULAR --- */
+        @media (max-width: 768px) {
+            .form-container {
+                padding: 40px 25px;
+            }
+            #matriculaForm {
+                grid-template-columns: 1fr; /* Tudo em 1 coluna no celular */
+                gap: 20px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -179,38 +277,41 @@
         <div class="header reveal">
             <h1>GATE</h1>
             <h2>FORMAÇÃO DE INSTRUTORES</h2>
-            <p><strong>Curso:</strong> Instrutor de Cursos e Treinamentos - CFC<br>Preencha seus dados e garanta sua vaga na próxima turma.</p>
+            <p><strong>Curso:</strong> Instrutor de Cursos e Treinamentos - CFC<br>Preencha seus dados com atenção e garanta sua vaga na próxima turma.</p>
         </div>
 
         <form id="matriculaForm">
-            <div class="form-group reveal" style="transition-delay: 0.1s;">
-                <label for="nome">Nome Completo:</label>
-                <input type="text" id="nome" name="nome" placeholder="Seu nome como no documento" required>
+            <!-- Dados Pessoais -->
+            <div class="form-group full-width reveal" style="transition-delay: 0.1s;">
+                <label for="nome"><i data-lucide="user"></i> Nome Completo:</label>
+                <input type="text" id="nome" name="nome" class="form-control" placeholder="Seu nome exatamente como no documento" required autocomplete="name">
             </div>
             
-            <div class="form-group reveal" style="transition-delay: 0.2s;">
-                <label for="nome_social">Nome Social (Opcional):</label>
-                <input type="text" id="nome_social" name="nome_social" placeholder="Como você prefere ser chamado(a)">
+            <div class="form-group full-width reveal" style="transition-delay: 0.2s;">
+                <label for="nome_social"><i data-lucide="smile"></i> Nome Social (Opcional):</label>
+                <input type="text" id="nome_social" name="nome_social" class="form-control" placeholder="Como você prefere ser chamado(a)">
             </div>
 
-            <div class="form-group reveal" style="transition-delay: 0.3s;">
-                <label for="telefone">Telefone (com DDD):</label>
-                <input type="tel" id="telefone" name="telefone" placeholder="(XX) XXXXX-XXXX" required pattern="^\(\d{2}\)\s\d{5}-\d{4}$">
-            </div>
+            <!-- Contatos (Lado a lado no Desktop) -->
+        <div class="form-group reveal" style="transition-delay: 0.3s;">
+            <label for="telefone"><i data-lucide="smartphone"></i> WhatsApp (com DDD):</label>
+            <input type="tel" id="telefone" name="telefone" class="form-control" placeholder="(XX) 9XXXX-XXXX" required pattern="^\(\d{2}\)\s\d{5}-\d{4}$" autocomplete="tel">
+        </div>
 
-            <div class="form-group reveal" style="transition-delay: 0.4s;">
-                <label for="email">Seu Melhor E-mail:</label>
-                <input type="email" id="email" name="email" placeholder="email.principal@exemplo.com" required>
-            </div>
+        <div class="form-group reveal" style="transition-delay: 0.4s;">
+            <label for="email"><i data-lucide="mail"></i> E-mail para contato:</label>
+            <input type="email" id="email" name="email" class="form-control" placeholder="email.principal@exemplo.com" required autocomplete="email">
+        </div>
 
-            <div class="form-group reveal" style="transition-delay: 0.5s;">
-                <label for="data_pagamento">Data Prevista do Pagamento:</label>
-                <input type="date" id="data_pagamento" name="data_pagamento" required style="color-scheme: dark;">
-            </div>
+        <!-- Pagamento (Lado a lado no Desktop) -->
+        <div class="form-group reveal" style="transition-delay: 0.5s;">
+            <label for="data_pagamento"><i data-lucide="calendar"></i> Data de Pagamento:</label>
+            <input type="date" id="data_pagamento" name="data_pagamento" class="form-control" required style="color-scheme: dark;">
+        </div>
 
-            <div class="form-group reveal" style="transition-delay: 0.6s;">
-                <label for="forma_pagamento">Forma de Pagamento:</label>
-                <select id="forma_pagamento" name="forma_pagamento" required>
+        <div class="form-group reveal" style="transition-delay: 0.6s;">
+                <label for="forma_pagamento"><i data-lucide="credit-card"></i> Forma de Pagamento:</label>
+                <select id="forma_pagamento" name="forma_pagamento" class="form-control" required>
                     <option value="" disabled selected>-- Escolha como prefere pagar --</option>
                     <option value="credito">Cartão de Crédito</option>
                     <option value="debito">Cartão de Débito</option>
@@ -218,24 +319,39 @@
                 </select>
             </div>
 
-            <div id="pix-options" class="form-group reveal" style="transition-delay: 0.7s;">
-                <label for="pix_parcelas">Opções de Parcelamento no PIX:</label>
-                <select id="pix_parcelas" name="pix_parcelas">
-                    <option value="1">1x (Pagamento Integral)</option>
-                    <option value="2">2x</option>
-                    <option value="3">3x</option>
-                    <option value="4">4x</option>
+            <!-- Opções PIX (Dinâmico) -->
+            <div id="pix-options" class="form-group full-width reveal" style="transition-delay: 0.7s;">
+                <label for="pix_parcelas"><i data-lucide="split-square-horizontal"></i> Opções de Parcelamento no PIX:</label>
+                <select id="pix_parcelas" name="pix_parcelas" class="form-control">
+                    <option value="1">1x (Pagamento Integral - Envio Imediato)</option>
+                    <option value="2">2x (Parcelado)</option>
+                    <option value="3">3x (Parcelado)</option>
+                    <option value="4">4x (Parcelado)</option>
                 </select>
             </div>
             
-            <div class="form-group reveal" style="transition-delay: 0.8s;">
-                <button type="submit" class="button-submit">Finalizar e garantir a vaga</button>
-            </div>
-        </form>
-    </div>
+            <!-- Botão -->
+        <div class="form-group full-width reveal" style="transition-delay: 0.8s;">
+            <button type="submit" class="button-submit" id="btn-submit">
+                Finalizar e garantir a vaga <i data-lucide="arrow-right"></i>
+            </button>
+        </div>
+    </form>
+    
+    <p class="cnpj-footer reveal" style="transition-delay: 0.9s;">CNPJ: 63.911.037/0001-91</p>
+</div>
 
-    <script>
-        // --- ANIMAÇÃO DE ROLAGEM ---
+<script>
+    // Inicializa os ícones do Lucide
+        lucide.createIcons();
+
+        // --- UX: DATA MÍNIMA DE PAGAMENTO ---
+        // Impede que o usuário selecione uma data no passado
+        const dataPagamentoInput = document.getElementById('data_pagamento');
+        const hoje = new Date().toISOString().split('T')[0];
+        dataPagamentoInput.setAttribute('min', hoje);
+
+        // --- ANIMAÇÃO DE ROLAGEM (REVEAL) ---
         const revealElements = document.querySelectorAll('.reveal');
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -247,12 +363,8 @@
         }, { threshold: 0.1 });
         revealElements.forEach(el => observer.observe(el));
 
-        // --- LÓGICA DO FORMULÁRIO ---
-        const formaPagamentoSelect = document.getElementById('forma_pagamento');
-        const pixOptionsDiv = document.getElementById('pix-options');
-        const matriculaForm = document.getElementById('matriculaForm');
+        // --- UX: MÁSCARA DE TELEFONE APRIMORADA ---
         const telefoneInput = document.getElementById('telefone');
-
         telefoneInput.addEventListener('input', function (e) {
             let value = e.target.value.replace(/\D/g, '').substring(0,11);
             if (value.length > 2) value = `(${value.substring(0, 2)}) ${value.substring(2)}`;
@@ -260,46 +372,83 @@
             e.target.value = value;
         });
 
+        // --- LÓGICA DO FORMULÁRIO (MOSTRAR/OCULTAR PIX) ---
+        const formaPagamentoSelect = document.getElementById('forma_pagamento');
+        const pixOptionsDiv = document.getElementById('pix-options');
+        
         formaPagamentoSelect.addEventListener('change', function() {
-            if (this.value === 'pix') pixOptionsDiv.style.display = 'block';
-            else pixOptionsDiv.style.display = 'none';
+            if (this.value === 'pix') {
+                pixOptionsDiv.style.display = 'flex'; // Usando flex p/ manter alinhamento do label
+            } else {
+                pixOptionsDiv.style.display = 'none';
+            }
         });
 
+        // --- ENVIO DO FORMULÁRIO (WHATSAPP) ---
+        const matriculaForm = document.getElementById('matriculaForm');
+        const btnSubmit = document.getElementById('btn-submit');
+
         matriculaForm.addEventListener('submit', function(event) {
-            event.preventDefault();
+            event.preventDefault(); // Impede o recarregamento da página
+
+            // Validação HTML5 Nativa
             if (!matriculaForm.checkValidity()) {
-                alert('Por favor, preencha todos os campos obrigatórios corretamente.');
+                // O navegador já mostra os balões de erro nativos, mas garantimos que não avance
                 return;
             }
-            const nome = document.getElementById('nome').value;
-            const nomeSocial = document.getElementById('nome_social').value;
-            const telefone = document.getElementById('telefone').value;
-            const email = document.getElementById('email').value;
 
-            const dataPagamento = new Date(document.getElementById('data_pagamento').value).toLocaleDateString('pt-BR', {timeZone: 'UTC'});
+            // UX: Feedback visual no botão de carregamento
+            const textoOriginalBotao = btnSubmit.innerHTML;
+            btnSubmit.classList.add('loading');
+            btnSubmit.innerHTML = 'Processando sua inscrição... <i data-lucide="loader" class="lucide-spin"></i>';
+            lucide.createIcons(); // Recarrega o ícone para renderizar o spinner
+
+            // Captura de Dados
+            const nome = document.getElementById('nome').value.trim();
+            const nomeSocial = document.getElementById('nome_social').value.trim();
+            const telefone = document.getElementById('telefone').value;
+            const email = document.getElementById('email').value.trim();
             
-            const formaPagamento = formaPagamentoSelect.options[formaPagamentoSelect.selectedIndex].text;
-            let pixParcelas = (formaPagamentoSelect.value === 'pix') ? ` em ${document.getElementById('pix_parcelas').value}x` : '';
+            // Formatando a data de AAAA-MM-DD para DD/MM/AAAA (Fuso UTC para evitar bug de dia anterior)
+            const dataBruta = document.getElementById('data_pagamento').value;
+            const dataArray = dataBruta.split('-');
+            const dataFormatada = `${dataArray[2]}/${dataArray[1]}/${dataArray[0]}`;
             
-            const mensagemWhatsApp = `*MATRÍCULA | CURSO CFC - GATE*
+            const formaPagamentoText = formaPagamentoSelect.options[formaPagamentoSelect.selectedIndex].text;
+            let pixParcelas = '';
+            if (formaPagamentoSelect.value === 'pix') {
+                const selectParcelas = document.getElementById('pix_parcelas');
+                const textoParcela = selectParcelas.options[selectParcelas.selectedIndex].text;
+                pixParcelas = `\n- *Detalhe:* ${textoParcela}`;
+            }
+            
+            // Montagem da Mensagem de forma limpa
+        const mensagemWhatsApp = `*MATRÍCULA | CURSO CFC - GATE*
 Olá! Acabei de realizar minha pré-matrícula e gostaria de confirmar minha vaga.
 
 *DADOS DO ALUNO:*
 - *Nome:* ${nome}
-${nomeSocial ? `- *Nome Social:* ${nomeSocial}\n` : ''}- *Telefone:* ${telefone}
-- *Email:* ${email}
+${nomeSocial ? `- *Nome Social:* ${nomeSocial}\n` : ''}- *WhatsApp:* ${telefone}
+- *E-mail:* ${email}
 
-*PAGAMENTO:*
-- *Data Prevista:* ${dataPagamento}
-- *Forma Escolhida:* ${formaPagamento}${pixParcelas}
+*DADOS DO PAGAMENTO:*
+- *Data de Pagamento:* ${dataFormatada}
+- *Forma Escolhida:* ${formaPagamentoText}${pixParcelas}
 
-Aguardo as instruções para finalizar o pagamento. Obrigado!`;
+Aguardo as instruções para finalizar. Obrigado!`;
 
-            const mensagemCodificada = encodeURIComponent(mensagemWhatsApp);
+        const mensagemCodificada = encodeURIComponent(mensagemWhatsApp);
             const numeroWhatsApp = '61998300711';
             const linkWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${mensagemCodificada}`;
 
-            window.open(linkWhatsApp, '_blank');
+            // Simula um pequeno delay (800ms) para o usuário ler o "Processando..." antes de redirecionar
+            setTimeout(() => {
+                window.open(linkWhatsApp, '_blank');
+                
+                // Restaura o botão caso o usuário volte para a aba
+                btnSubmit.classList.remove('loading');
+                btnSubmit.innerHTML = textoOriginalBotao;
+            }, 800);
         });
     </script>
 </body>
